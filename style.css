@@ -95,3 +95,7 @@ body {
   font-size: 150px;
   content: "◯";
 }
+
+.won::after {
+  color: red;
+}

@@ -42,20 +42,44 @@ const checkGameStatus = () => {
 //Winner
 if (topLeft && topLeft === topMiddle && topLeft === topRight) {
     handleWin(topLeft);
+    gameCells[0].classList.add('won');
+    gameCells[1].classList.add('won');
+    gameCells[2].classList.add('won');
 } else if (middleLeft && middleLeft === middleMiddle && middleLeft === middleRight) {
     handleWin(middleLeft);
+    gameCells[3].classList.add('won');
+    gameCells[4].classList.add('won');
+    gameCells[5].classList.add('won');
 } else if (bottomLeft && bottomLeft === bottomMiddle && bottomLeft === bottomRight) {
     handleWin(bottomLeft);
+    gameCells[6].classList.add('won');
+    gameCells[7].classList.add('won');
+    gameCells[8].classList.add('won');
 } else if (topLeft && topLeft === middleLeft && topLeft === bottomLeft) {
     handleWin(topLeft);
+    gameCells[0].classList.add('won');
+    gameCells[3].classList.add('won');
+    gameCells[6].classList.add('won');
 } else if (topMiddle && topMiddle === middleMiddle && topMiddle === bottomMiddle) {
     handleWin(topMiddle);
+    gameCells[1].classList.add('won');
+    gameCells[4].classList.add('won');
+    gameCells[7].classList.add('won');
 } else if (topRight && topRight === middleRight && topRight === bottomRight) {
     handleWin(topRight);
+    gameCells[2].classList.add('won');
+    gameCells[5].classList.add('won');
+    gameCells[8].classList.add('won');
 } else if (topLeft && topLeft === middleMiddle && topLeft === bottomRight) {
     handleWin(topLeft);
+    gameCells[0].classList.add('won');
+    gameCells[4].classList.add('won');
+    gameCells[8].classList.add('won');
 } else if (topRight && topRight === middleMiddle && topRight === bottomLeft) {
     handleWin(topRight);
+    gameCells[2].classList.add('won');
+    gameCells[4].classList.add('won');
+    gameCells[6].classList.add('won');
 } else if (topLeft && topMiddle && topRight && middleLeft && middleMiddle && middleRight && bottomLeft && bottomMiddle && bottomRight) {
     gameIsLive = false;
     statusDiv.innerHTML = 'DRAW!';
@@ -73,14 +97,20 @@ if (topLeft && topLeft === topMiddle && topLeft === topRight) {
 
 // Event Handlers
 const handleRestart =(e) => {
-   console.log(e);
+   xIsNext = true;
+   statusDiv.innerHTML = `${xSymbol} Turn`;
+   winner = null;
+   for (const gameCell of gameCells) {
+       gameCell.classList.remove('x');
+       gameCell.classList.remove('o');
+       gameCell.classList.remove('won');
+   }
 };
 const handleClickCell = (e) => {
     const classList = e.target.classList;
-   
-    const locaton = classList[1];
 
-    if (classList[2] === 'x' || classList[2] === 'o') {
+
+    if (classList[1] === 'x' || classList[1] === 'o') {
         return;
     } 
 
