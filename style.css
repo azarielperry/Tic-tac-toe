@@ -43,6 +43,11 @@ body {
   justify-content: space-around;
   padding: 20px;
 }
+
+.status span {
+  color: #21e9ce;
+}
+
 .restart {
   cursor: pointer;
   /* justify-items: flex-end; */
@@ -86,6 +91,7 @@ body {
   content: "×";
 }
 .o::after {
+  color: #f2ebd3;
   font-size: 150px;
   content: "◯";
 }
