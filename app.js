@@ -2,12 +2,13 @@
 const statusDiv = document.querySelector('.status');
 const restart = document.querySelector('.restart');
 const gameCells = document.querySelectorAll('.game-cell');
+const displayText = document.querySelector('.text');
 
 //Game Variable
 let gameIsLive = true;
 let xIsNext = true;
 
-
+ 
 // Game Constants
 const xSymbol ='×';
 const oSymbol= '◯';
@@ -20,9 +21,9 @@ const letterToSymbol = (letter) => letter === 'x' ? xSymbol : oSymbol;
 const handleWin = (letter) => {
   gameIsLive = false;
   if (letter === 'x') {
-    statusDiv.innerHTML = `${letterToSymbol(letter)} WINNER!`;
+    displayText.innerHTML = `${letterToSymbol(letter)} WINNER!`;
   } else {
-    statusDiv.innerHTML = `<span>${letterToSymbol(letter)} WINNER!</span>`;
+    displayText.innerHTML = `<span>${letterToSymbol(letter)} WINNER!</span>`;
   }
 }; 
 const checkGameStatus = () => {
@@ -44,51 +45,64 @@ if (topLeft && topLeft === topMiddle && topLeft === topRight) {
     gameCells[0].classList.add('won');
     gameCells[1].classList.add('won');
     gameCells[2].classList.add('won');
+     statusDiv.innerHTML = 'Game Over';
 } else if (middleLeft && middleLeft === middleMiddle && middleLeft === middleRight) {
     handleWin(middleLeft);
     gameCells[3].classList.add('won');
     gameCells[4].classList.add('won');
     gameCells[5].classList.add('won');
+    statusDiv.innerHTML = 'Game Over';
 } else if (bottomLeft && bottomLeft === bottomMiddle && bottomLeft === bottomRight) {
     handleWin(bottomLeft);
     gameCells[6].classList.add('won');
     gameCells[7].classList.add('won');
     gameCells[8].classList.add('won');
+    statusDiv.innerHTML = 'Game Over';
 } else if (topLeft && topLeft === middleLeft && topLeft === bottomLeft) {
     handleWin(topLeft);
     gameCells[0].classList.add('won');
     gameCells[3].classList.add('won');
     gameCells[6].classList.add('won');
+    statusDiv.innerHTML = 'Game Over';
 } else if (topMiddle && topMiddle === middleMiddle && topMiddle === bottomMiddle) {
     handleWin(topMiddle);
     gameCells[1].classList.add('won');
     gameCells[4].classList.add('won');
     gameCells[7].classList.add('won');
+    statusDiv.innerHTML = 'Game Over';
 } else if (topRight && topRight === middleRight && topRight === bottomRight) {
     handleWin(topRight);
     gameCells[2].classList.add('won');
     gameCells[5].classList.add('won');
     gameCells[8].classList.add('won');
+    statusDiv.innerHTML = 'Game Over';
 } else if (topLeft && topLeft === middleMiddle && topLeft === bottomRight) {
     handleWin(topLeft);
     gameCells[0].classList.add('won');
     gameCells[4].classList.add('won');
     gameCells[8].classList.add('won');
+    statusDiv.innerHTML = 'Game Over';
 } else if (topRight && topRight === middleMiddle && topRight === bottomLeft) {
     handleWin(topRight);
     gameCells[2].classList.add('won');
     gameCells[4].classList.add('won');
     gameCells[6].classList.add('won');
+    statusDiv.innerHTML = 'Game Over';
 } else if (topLeft && topMiddle && topRight && middleLeft && middleMiddle && middleRight && bottomLeft && bottomMiddle && bottomRight) {
     gameIsLive = false;
-    statusDiv.innerHTML = 'DRAW!';
+    displayText.innerHTML = 'DRAW!';
+    statusDiv.innerHTML = 'Game Over';
 } else {
     xIsNext =!xIsNext;
   if (xIsNext) {
         statusDiv.innerHTML = `${xSymbol} Turn`;
-  } else {
-      statusDiv.innerHTML = `<span> ${oSymbol} Turn </span>`;
-  }
+        
+  } else { 
+      (statusDiv.innerHTML = `<span> ${oSymbol} Turn </span>`);
+//    else {
+//         statusDiv.innerHTML = 'Game Over';
+   }      
+  
 }
 };
 
@@ -102,6 +116,8 @@ const handleRestart =(e) => {
        gameCell.classList.remove('x');
        gameCell.classList.remove('o');
        gameCell.classList.remove('won');
+    //    gameCell.classList.remove(displayText.innerHTML);
+    
    }
    gameIsLive = true;
 };
@@ -116,10 +132,12 @@ const handleClickCell = (e) => {
     if (xIsNext) {
         classList.add('x');
         checkGameStatus();
+       
         
     } else {
         classList.add('o');
         checkGameStatus();
+       
     }
     
 };
@@ -130,3 +148,68 @@ for(const gameCell of gameCells) {
     gameCell.addEventListener('click', handleClickCell)
 } 
 
+
+// function bestMove() {
+//     // AI to make its turn
+//     let bestScore = -Infinity;
+//     let move;
+//     for (let i = 0; i < 3; i++) {
+//       for (let j = 0; j < 3; j++) {
+//         // Is the spot available?
+//         if (board[i][j] == '') {
+//           board[i][j] = ai;
+//           let score = minimax(board, 0, false);
+//           board[i][j] = '';
+//           if (score > bestScore) {
+//             bestScore = score;
+//             move = { i, j };
+//           }
+//         }
+//       }
+//     }
+//     board[move.i][move.j] = ai;
+//     currentPlayer = human;
+//   }
+  
+//   let scores = {
+//     X: 10,
+//     O: -10,
+//     tie: 0
+//   };
+  
+//   function minimax(board, depth, isMaximizing) {
+//     let result = checkWinner();
+//     if (result !== null) {
+//       return scores[result];
+//     }
+  
+//     if (isMaximizing) {
+//       let bestScore = -Infinity;
+//       for (let i = 0; i < 3; i++) {
+//         for (let j = 0; j < 3; j++) {
+//           // Is the spot available?
+//           if (board[i][j] == '') {
+//             board[i][j] = ai;
+//             let score = minimax(board, depth + 1, false);
+//             board[i][j] = '';
+//             bestScore = max(score, bestScore);
+//           }
+//         }
+//       }
+//       return bestScore;
+//     } else {
+//       let bestScore = Infinity;
+//       for (let i = 0; i < 3; i++) {
+//         for (let j = 0; j < 3; j++) {
+//           // Is the spot available?
+//           if (board[i][j] == '') {
+//             board[i][j] = human;
+//             let score = minimax(board, depth + 1, true);
+//             board[i][j] = '';
+//             bestScore = min(score, bestScore);
+//           }
+//         }
+//       }
+//       return bestScore;
+//     }
+//   }
