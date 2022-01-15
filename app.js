@@ -46,52 +46,61 @@ if (topLeft && topLeft === topMiddle && topLeft === topRight) {
     gameCells[1].classList.add('won');
     gameCells[2].classList.add('won');
      statusDiv.innerHTML = 'Game Over';
+     document.querySelector(".endgame").style.display ="";
 } else if (middleLeft && middleLeft === middleMiddle && middleLeft === middleRight) {
     handleWin(middleLeft);
     gameCells[3].classList.add('won');
     gameCells[4].classList.add('won');
     gameCells[5].classList.add('won');
     statusDiv.innerHTML = 'Game Over';
+    document.querySelector(".endgame").style.display ="";
 } else if (bottomLeft && bottomLeft === bottomMiddle && bottomLeft === bottomRight) {
     handleWin(bottomLeft);
     gameCells[6].classList.add('won');
     gameCells[7].classList.add('won');
     gameCells[8].classList.add('won');
     statusDiv.innerHTML = 'Game Over';
+    document.querySelector(".endgame").style.display ="";
 } else if (topLeft && topLeft === middleLeft && topLeft === bottomLeft) {
     handleWin(topLeft);
     gameCells[0].classList.add('won');
     gameCells[3].classList.add('won');
     gameCells[6].classList.add('won');
     statusDiv.innerHTML = 'Game Over';
+    document.querySelector(".endgame").style.display ="";
 } else if (topMiddle && topMiddle === middleMiddle && topMiddle === bottomMiddle) {
     handleWin(topMiddle);
     gameCells[1].classList.add('won');
     gameCells[4].classList.add('won');
     gameCells[7].classList.add('won');
     statusDiv.innerHTML = 'Game Over';
+    document.querySelector(".endgame").style.display ="";
 } else if (topRight && topRight === middleRight && topRight === bottomRight) {
     handleWin(topRight);
     gameCells[2].classList.add('won');
     gameCells[5].classList.add('won');
     gameCells[8].classList.add('won');
     statusDiv.innerHTML = 'Game Over';
+    document.querySelector(".endgame").style.display ="";
 } else if (topLeft && topLeft === middleMiddle && topLeft === bottomRight) {
     handleWin(topLeft);
     gameCells[0].classList.add('won');
     gameCells[4].classList.add('won');
     gameCells[8].classList.add('won');
     statusDiv.innerHTML = 'Game Over';
+    document.querySelector(".endgame").style.display ="";
 } else if (topRight && topRight === middleMiddle && topRight === bottomLeft) {
     handleWin(topRight);
     gameCells[2].classList.add('won');
     gameCells[4].classList.add('won');
     gameCells[6].classList.add('won');
     statusDiv.innerHTML = 'Game Over';
+    document.querySelector(".endgame").style.display ="";
 } else if (topLeft && topMiddle && topRight && middleLeft && middleMiddle && middleRight && bottomLeft && bottomMiddle && bottomRight) {
     gameIsLive = false;
     displayText.innerHTML = 'DRAW!';
     statusDiv.innerHTML = 'Game Over';
+    document.querySelector(".endgame").style.display ="";
 } else {
     xIsNext =!xIsNext;
   if (xIsNext) {
@@ -99,9 +108,7 @@ if (topLeft && topLeft === topMiddle && topLeft === topRight) {
         
   } else { 
       (statusDiv.innerHTML = `<span> ${oSymbol} Turn </span>`);
-//    else {
-//         statusDiv.innerHTML = 'Game Over';
-   }      
+  }     
   
 }
 };
@@ -116,7 +123,7 @@ const handleRestart =(e) => {
        gameCell.classList.remove('x');
        gameCell.classList.remove('o');
        gameCell.classList.remove('won');
-    //    gameCell.classList.remove(displayText.innerHTML);
+       document.querySelector(".endgame").style.display ="none";
     
    }
    gameIsLive = true;
@@ -138,7 +145,7 @@ const handleClickCell = (e) => {
         classList.add('o');
         checkGameStatus();
        
-    }
+    }              
     
 };
 
