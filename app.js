@@ -10,13 +10,34 @@ let xIsNext = true;
 
  
 // Game Constants
-const xSymbol ='×';
-const oSymbol= '◯';
+// const xSymbol ='×';
+// const oSymbol= '◯';
+let human = '◯';
+let ai = '×';
+let currentPlayer = human;
+let winner = null;
 
 
 // Functions
 
-const letterToSymbol = (letter) => letter === 'x' ? xSymbol : oSymbol;
+// const letterToSymbol = (letter) => letter === 'x' ? xSymbol : oSymbol;
+const letterToSymbol = (letter) => letter === 'x' ? ai : human;
+
+function mousePressed() {
+    if (currentPlayer == human) {
+      // Human make turn
+      let i = floor(mouseX / w);
+      let j = floor(mouseY / h);
+      // If valid turn
+      if (board[i][j] == '') {
+        board[i][j] = human;
+        currentPlayer = ai;
+        bestMove();
+      }
+    }
+  }
+  
+
 
 const handleWin = (letter) => {
   gameIsLive = false;
@@ -143,7 +164,8 @@ const handleClickCell = (e) => {
         
     } else {
         classList.add('o');
-        checkGameStatus();
+        checkGameStatus();addEventListener
+        
        
     }              
     
@@ -154,6 +176,11 @@ restart.addEventListener('click', handleRestart);
 for(const gameCell of gameCells) {
     gameCell.addEventListener('click', handleClickCell)
 } 
+
+
+
+
+
 
 
 // function bestMove() {
@@ -185,7 +212,7 @@ for(const gameCell of gameCells) {
 //   };
   
 //   function minimax(board, depth, isMaximizing) {
-//     let result = checkWinner();
+//     let result = han();
 //     if (result !== null) {
 //       return scores[result];
 //     }
@@ -202,6 +229,7 @@ for(const gameCell of gameCells) {
 //             bestScore = max(score, bestScore);
 //           }
 //         }
+
 //       }
 //       return bestScore;
 //     } else {
